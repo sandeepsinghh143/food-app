@@ -30,7 +30,7 @@ const orderButton=document.getElementById("order-button");
 const orderDiv=document.getElementById("first-button");
 orderButton.addEventListener("click",takeOrder);
 const heading=document.getElementById("order-heading");
-
+let prepDiv =document.getElementById("second-button");
 // ?order functionality
 async function takeOrder() {
     heading.innerText="You have selected these three items. Please continue to place Order."
@@ -53,22 +53,23 @@ async function takeOrder() {
     </div>`
     div.innerHTML=content;
     container.append(div);
+    prepDiv.removeAttribute("id");
     }
-    let main=document.getElementById('main');
-    let div=document.createElement('div');
-    div.className="btn-div";
-    div.id="prep-button";
-    div.innerHTML=`<button class="button" id="prep" onclick="orderPrep().then(payOrder().then(thankyouFnc()))">Order</button>`;
-    main.append(div);
+    // let main=document.getElementById('main');
+    // let div=document.createElement('div');
+    // div.className="btn-div";
+    // div.id="prep-button";
+    // div.innerHTML=`<button class="button" id="prep" onclick="orderPrep().then(payOrder().then(thankyouFnc()))">Order</button>`;
+    // main.append(div);
   }
 
+  let prepBtn =document.getElementById("prep");
+  let orderStatus=prepBtn.addEventListener("click",orderPrep);
   
   async function orderPrep() {
-    let prepDiv=document.getElementById("prep-button");
     heading.innerText="Preparing your Order...."
     container.innerHTML="Please wait..."
-
-    prepDiv.style.display="none";
+    prepDiv.setAttribute("id","second-button");
     return await new Promise(resolve => {
       setTimeout(() => {
         resolve({ order_status: true, paid: false });
