@@ -63,8 +63,8 @@ async function takeOrder() {
     // main.append(div);
   }
 
-  let prepBtn =document.getElementById("prep");
-  let orderStatus=prepBtn.addEventListener("click",orderPrep);
+  // let prepBtn =document.getElementById("prep");
+  // prepBtn.addEventListener("click",orderPrep);
   
   async function orderPrep() {
     heading.innerText="Preparing your Order...."
@@ -74,22 +74,25 @@ async function takeOrder() {
       setTimeout(() => {
         resolve({ order_status: true, paid: false });
       }, 1500);
-    });
+    })
+    .then(payOrder);
   }
-
 
   async function payOrder() {
     heading.innerText="Payment Successful!! Order Completed..."
-    container.innerHTML="";
+    heading.style.color="green";
+    container.innerHTML="Visit us soon again.....";
+    container.style.color="green";
     return await new Promise(resolve => {
       setTimeout(() => {
         resolve({ order_status: true, paid: true });
       }, 1000);
-    });
+    })
+    .then(thankyouFnc);
   }
 
   async function thankyouFnc() {
     setTimeout(()=>{
         alert('Thank you for eating with us today!');
-    },3000)
+    });
   }
